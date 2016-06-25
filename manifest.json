@@ -3,6 +3,7 @@
 
   "name": "Face Lock",
   "description": "Face lock for chrome",
+  "options_page": "options.html",
   "version": "1.0",
 
   "browser_action": {
@@ -17,7 +18,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.facebook.com/*"],
-      "js": ["hello.js"]
+      "js": ["popup.js"]
     }
   ]
 }
