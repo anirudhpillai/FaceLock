@@ -82,13 +82,47 @@ window.addEventListener("DOMContentLoaded", function() {
     })
 
     .done(function(data) {
-      alert(JSON.stringify(data));
+      p = data
+      
+      if (jQuery.isEmptyObject(p)) {
+        console.log('[!] Did not find any faces!');
+      } else {
+        console.log(p[0].faceId);
+        fid = p[0].faceId;
+
+        // this is ugly
+
+        var params2 = {
+          "faceId1": "4962b627-1df6-4636-8cd2-38a1cbde133e",
+          "faceId2": fid
+        };
+
+        jQuery.ajax({
+          url: "https://api.projectoxford.ai/face/v1.0/verify",
+          beforeSend: function(xhrObj){
+            // Request headers
+            xhrObj.setRequestHeader("Content-Type", "application/json");
+            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", API_KEY);
+          },
+          type: "POST",
+          // Request body
+          data: JSON.stringify(params2)
+        })
+
+        .done(function(data) {
+          console.log(data.isIdentical);
+        })
+
+        .fail(function(error) {
+          alert('-1');
+        });
+        // here it ends
+      }
     })
 
     .fail(function(error) {
-      alert(error);
+      alert('-1');
     });
-
   });
 
 }, false);
