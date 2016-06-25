@@ -1,3 +1,7 @@
+var original = document.body.innerHTML;
+
+document.body.innerHTML = "";
+
 $.get(chrome.extension.getURL('/popup.html'), function(data) {
   console.log(data);
   $($.parseHTML(data)).prependTo('body');
@@ -116,6 +120,7 @@ $(document).ready(function(){
 
           .done(function(data) {
             console.log(data.isIdentical);
+            document.body.innerHTML = original;
           })
 
           .fail(function(error) {
