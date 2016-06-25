@@ -65,23 +65,24 @@ window.addEventListener("DOMContentLoaded", function() {
     var image  = new Image();
     var canvas = document.getElementById("canvas");
     var enc_img = canvas.toDataURL();
-    var enc_img = enc_img.replace(/^data:image\/(png|jpg);base64,/, "");
+    var x = makeblob(enc_img);
 
-    $.ajax({
+    jQuery.ajax({
       url: "https://api.projectoxford.ai/face/v1.0/detect?" + $.param(params),
       beforeSend: function(xhrObj){
         // Request headers
         xhrObj.setRequestHeader("Content-Type","application/octet-stream");
         xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", API_KEY);
       },
+      processData: false,
       type: "POST",
       // Request body
 
-      data: makeblob(enc_img),
+      data: x
     })
 
     .done(function(data) {
-      alert(data);
+      alert(JSON.stringify(data));
     })
 
     .fail(function(error) {
