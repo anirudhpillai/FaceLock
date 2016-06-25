@@ -11,6 +11,13 @@
   },
   "permissions": [
     "activeTab",
-    "https://ajax.googleapis.com/"
+    "tabs",
+    "*://*.facebook.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.facebook.com/*"],
+      "js": ["hello.js"]
+    }
   ]
 }
