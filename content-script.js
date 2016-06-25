@@ -1,5 +1,4 @@
 var original = document.body.innerHTML;
-
 document.body.innerHTML = "";
 
 $.get(chrome.extension.getURL('/popup.html'), function(data) {
@@ -8,7 +7,6 @@ $.get(chrome.extension.getURL('/popup.html'), function(data) {
 });
 
 $(document).ready(function(){
-
     var canvas = document.getElementById("canvas"),
       context = canvas.getContext("2d"),
       video = document.getElementById("video"),
@@ -36,9 +34,9 @@ $(document).ready(function(){
       }, errBack);
     }
 
-    document.getElementById("snap").addEventListener("click", function() {
-      context.drawImage(video, 0, 0, 640, 480);
-    });
+    // document.getElementById("snap").addEventListener("click", function() {
+    //   context.drawImage(video, 0, 0, 640, 480);
+    // });
 
     makeblob = function (dataURL) {
               var BASE64_MARKER = ';base64,';
@@ -63,6 +61,7 @@ $(document).ready(function(){
           }
 
     document.getElementById("verify").addEventListener("click", function() {
+      context.drawImage(video, 0, 0, 640, 480);
       var API_KEY = "b067f2e6c5344252b40d9ee0f682fe4f";
 
       // first get the faceID
@@ -71,7 +70,6 @@ $(document).ready(function(){
       };
 
       // get the picture from the canvas before sending it
-      var image  = new Image();
       var canvas = document.getElementById("canvas");
       var enc_img = canvas.toDataURL();
       var x = makeblob(enc_img);
@@ -120,7 +118,8 @@ $(document).ready(function(){
 
           .done(function(data) {
             console.log(data.isIdentical);
-            document.body.innerHTML = original;
+            if (data.isIdentical) document.body.innerHTML = original;
+            else alert("Authentification failed.");
           })
 
           .fail(function(error) {
