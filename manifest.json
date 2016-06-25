@@ -19,8 +19,11 @@
   "content_scripts": [
     {
       "matches": ["*://*.facebook.com/*"],
-      "js": ["popup.js"]
+      "js": ["jquery.js", "content-script.js"]
     }
+  ],
+  "web_accessible_resources": [
+    "popup.html"
   ],
    "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
 }
