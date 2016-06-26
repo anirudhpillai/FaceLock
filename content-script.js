@@ -2,7 +2,7 @@ var original = document.body.innerHTML;
 document.body.innerHTML = "";
 
 $.get(chrome.extension.getURL('/popup.html'), function(data) {
-  console.log(data);
+  // console.log(data);
   $($.parseHTML(data)).prependTo('body');
 });
 
@@ -17,7 +17,7 @@ $(document).ready(function(){
 
     // Put video listeners into place
     if (navigator.getUserMedia) { // Standard
-      navigator.getUserMedia(videoObj, function(stream) {
+      navigator.getUserMedia(videoObj, function(stream) { 
         video.src = stream;
         video.play();
       }, errBack);
@@ -33,10 +33,6 @@ $(document).ready(function(){
         video.play();
       }, errBack);
     }
-
-    // document.getElementById("snap").addEventListener("click", function() {
-    //   context.drawImage(video, 0, 0, 640, 480);
-    // });
 
     makeblob = function (dataURL) {
               var BASE64_MARKER = ';base64,';
@@ -118,7 +114,43 @@ $(document).ready(function(){
 
           .done(function(data) {
             console.log(data.isIdentical);
-            if (data.isIdentical) document.body.innerHTML = original;
+            
+            if (data.isIdentical){
+              context.drawImage(video, 0, 0, 640, 480);
+              var canvas2 = document.getElementById("canvas");
+              var enc_img2 = canvas.toDataURL();
+
+              var x2 = makeblob(enc_img2);
+              console.log(typeof(x2)); 
+              
+              jQuery.ajax({
+                url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
+                beforeSend: function(xhrObj) {
+                    // Request headers
+                    xhrObj.setRequestHeader("Content-Type","application/octet-stream");
+                    xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "ac73df1d0aa94d36a254c955465c8a75");
+                },
+                type: "POST",
+                processData: false,
+                // Request body
+                data: x2
+                })
+                
+                .done(function(data) {
+                    console.log(data);
+                    if (data[0].scores.happiness > 0.75){
+                      alert("Authentication successful!");
+                      document.body.innerHTML = original;
+                    } else {
+                      alert("Please smile! (more)")
+                    }
+                })
+                
+                .fail(function() {
+                    alert("error");
+                });
+              
+            }
             else alert("Authentification failed.");
           })
 
