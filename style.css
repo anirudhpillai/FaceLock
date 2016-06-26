@@ -1,7 +1,7 @@
 .ultimatediv {
-  height:100%;
+  height:1000px;
   background: #5C8B91;
-  padding: 60px;
+  padding-top: 120px;
 }
 
 .ultimatevideo {
@@ -11,8 +11,8 @@
 
 .ultimateh3 {
   text-align: center;
-  padding-top: 20px;
-  font-size: 26px;
+  padding-top: 30px;
+  font-size: 42px;
   font-weight: 400;
   color: #0F6225;
 }
@@ -20,8 +20,9 @@
 .insidediv {
   background: #F7F7F7;
   margin: 0 auto;
-  width: 400px;
-  height: 450px;
+  width: 500px;
+  height: 550px;
+  border-radius: 5px;
 }
 
 .ultimatebutton {
@@ -31,10 +32,10 @@
   font-weight: 600;
   border: 0;
   background:#6891A2;
-  margin: 10px auto;
+  margin: 20px auto;
   border-radius: 5px;
   color:white;
-
+  margin-top:0px;
 }
 
 .ultimatebutton:hover {
