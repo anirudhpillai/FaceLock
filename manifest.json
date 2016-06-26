@@ -19,6 +19,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.facebook.com/*"],
+      "css":["style.css"],
       "js": ["jquery.js", "content-script.js"]
     }
   ],
