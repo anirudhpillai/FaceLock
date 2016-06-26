@@ -1,20 +1,41 @@
 .ultimatediv {
-  height:100%; padding: 30px;
-}
-
-.ultimateh1 {
-  font-size:35px;text-align:center;padding-bottom:30px;color:#212121;
+  height:100%;
+  background: #5C8B91;
+  padding: 60px;
 }
 
 .ultimatevideo {
-  display:block; margin: 0 auto;
+  display:block;
+  margin: 0 auto;
+}
+
+.ultimateh3 {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 26px;
+  font-weight: 200;
+}
+
+.insidediv {
+  background: #F7F7F7;
+  margin: 0 auto;
+  width: 400px;
+  height: 450px;
 }
 
 .ultimatebutton {
-  display:block;padding: 16px 40px; border: 0; background:#0288D1;margin: 30px auto; border-radius: 10px; color:white;
+  display:block;
+  padding: 14px 100px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 0;
+  background:#6891A2;
+  margin: 10px auto;
+  border-radius: 5px;
+  color:white;
 
 }
 
 .ultimatebutton:hover {
-  background: yellow;
+  background: #14652C;
 }
